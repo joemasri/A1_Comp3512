@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
+    <link rel="stylesheet" type="text/css" href="SingleSongStyles.css">
 </head>
 <body>
     <header>
@@ -36,5 +37,17 @@
     <footer>
         <h2>Footer</h2>
     </footer>
+
+    <footer>
+        <p>Course: COMP 3512</p>
+        <p>&copy; Zee El-Masri, Andrew Yu</p>
+        <p>
+            <a class="footer-link" href="https://github.com/joemasri/A1_Comp3512.git">GitHub Repo</a>
+            <a class="footer-link" href="https://github.com/joemasri">Group Member 1</a>
+            <a class="footer-link" href="https://github.com/ayu381">Group Member 2</a>
+        </p>
+    </footer>
+
+
 </body>
 </html>
