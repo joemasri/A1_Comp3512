@@ -66,6 +66,26 @@ try {
     die($e->getMessage());
 }
 
+try {
+    $typeSql = 'SELECT t.type_name FROM types t INNER JOIN artists a ON t.type_id = a.artist_type_id WHERE a.artist_id=:artist_id';
+
+    // statement is prepared for type
+    $typeStatement = $db->prepare($typeSql);
+
+    // querystring value is retrieved
+    $artist_id = $s['artist_id']; 
+    $typeStatement->bindValue(':artist_id', $artist_id, PDO::PARAM_INT);
+
+    // query is executed
+    $typeStatement->execute();
+
+    // type info is fetched
+    $typeData = $typeStatement->fetch();
+
+} catch (PDOException $e) {
+    die($e->getMessage());
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -94,18 +114,29 @@ try {
         <h1>Song Information</h1>
         <!-- Your song information content goes here -->
         
-        <!--verify contents of database-->
+        <!-- Verify contents of database -->
         <?php if ($s) : ?>
-        <!--contents of database are displayed-->
-        <p><?php echo htmlspecialchars ($s['title']); ?>, <?php echo htmlspecialchars ($artistData['artist_name']); ?>, <?php echo htmlspecialchars ($genreData['genre_name']); ?>, <?php echo htmlspecialchars ($s['year']); ?></p>
-        <ul>
-            <li><strong>BPM:</strong> <?php echo htmlspecialchars($s['bpm']); ?></li>
-            <li><strong>Energy:</strong> <?php echo htmlspecialchars($s['energy']); ?></li>
-            <li><strong>Danceability:</strong> <?php echo htmlspecialchars($s['danceability']); ?></li>
-            <li><strong>Loudness:</strong> <?php echo htmlspecialchars($s['loudness']); ?></li>
-        <?php else : ?>
-            <li>No song found</li>
+        <p><?php echo htmlspecialchars($s['title']); ?>, <?php echo htmlspecialchars($artistData['artist_name']); ?>,
+        <?php if ($typeData !== false) : ?>
+        <?php echo htmlspecialchars($typeData['type_name']); ?>,
         <?php endif; ?>
+        <?php echo htmlspecialchars($genreData['genre_name']); ?>, 
+        <?php echo htmlspecialchars($s['year']); ?>,
+        <?php echo htmlspecialchars($s['duration']); ?></p>
+    <ul>
+        <li><strong>BPM:</strong> <?php echo htmlspecialchars($s['bpm']); ?></li>
+        <li><strong>Energy:</strong> <?php echo htmlspecialchars($s['energy']); ?></li>
+        <li><strong>Danceability:</strong> <?php echo htmlspecialchars($s['danceability']); ?></li>
+        <li><strong>Liveness:</strong> <?php echo htmlspecialchars($s['liveness']); ?></li>
+        <li><strong>Valence:</strong> <?php echo htmlspecialchars($s['valence']); ?></li>
+        <li><strong>Acousticness:</strong> <?php echo htmlspecialchars($s['acousticness']); ?></li>
+        <li><strong>Speechiness:</strong> <?php echo htmlspecialchars($s['speechiness']); ?></li>
+        <li><strong>Popularity:</strong> <?php echo htmlspecialchars($s['popularity']); ?></li>
+        <li><strong>Loudness:</strong> <?php echo htmlspecialchars($s['loudness']); ?></li>
+    </ul>
+    <?php else : ?>
+    <li>No song found</li>
+    <?php endif; ?>
     </ul>
     </section>
 
