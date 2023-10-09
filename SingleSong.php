@@ -86,6 +86,13 @@ try {
     die($e->getMessage());
 }
 
+//converts seconds to m:ss format
+function secondsToMinutesSeconds($seconds) {
+    $minutes = floor($seconds / 60);
+    $remainingSeconds = $seconds % 60;
+    return sprintf("%d:%02d", $minutes, $remainingSeconds);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -122,7 +129,7 @@ try {
         <?php endif; ?>
         <?php echo htmlspecialchars($genreData['genre_name']); ?>, 
         <?php echo htmlspecialchars($s['year']); ?>,
-        <?php echo htmlspecialchars($s['duration']); ?></p>
+        <?php echo secondsToMinutesSeconds($s['duration']); ?></p>
     <ul>
         <li><strong>BPM:</strong> <?php echo htmlspecialchars($s['bpm']); ?></li>
         <li><strong>Energy:</strong> <?php echo htmlspecialchars($s['energy']); ?></li>
