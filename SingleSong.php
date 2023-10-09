@@ -1,6 +1,6 @@
 <?php
 
-// establish a database connection
+// Establish a database connection
 try {
     $db = new PDO('sqlite:./data/music.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -9,84 +9,76 @@ try {
 }
 
 try {
-    $songSQL = 'SELECT * FROM songs WHERE song_id=:si';
-    
-    // statement is prepared for songs
-    $statement = $db->prepare($songSQL);
+    $songSQL = 'SELECT * FROM songs WHERE song_id=:song_id';
 
-    // querystring value is retrieved
+    // Statement is prepared for songs
+    $songStatement = $db->prepare($songSQL);
+
+    // Querystring value is retrieved
     $song_id = filter_input(INPUT_GET, 'song_id', FILTER_VALIDATE_INT);
-    $statement->bindValue(':si', $song_id, PDO::PARAM_INT);
+    $songStatement->bindValue(':song_id', $song_id, PDO::PARAM_INT);
 
-    // query is executed
-    $statement->execute();
+    // Query is executed
+    $songStatement->execute();
 
-    // song info is fetched
-    $s = $statement->fetch();
+    // Song info is fetched
+    $songData = $songStatement->fetch();
+
+    if ($songData) {
+        $artistSQL = 'SELECT * FROM artists WHERE artist_id=:artist_id';
+
+        // Statement is prepared for artists
+        $artistStatement = $db->prepare($artistSQL);
+
+        // Querystring value is retrieved
+        $artist_id = $songData['artist_id'];
+        $artistStatement->bindValue(':artist_id', $artist_id, PDO::PARAM_INT);
+
+        // Query is executed
+        $artistStatement->execute();
+
+        // Artist info is fetched
+        $artistData = $artistStatement->fetch();
+
+    if ($artistData) {
+        $genreSQL = 'SELECT * FROM genres WHERE genre_id=:genre_id';
+
+        // Statement is prepared for genre
+        $genreStatement = $db->prepare($genreSQL);
+
+         // Suerystring value is retrieved
+        $genre_id = $songData['genre_id'];
+        $genreStatement->bindValue(':genre_id', $genre_id, PDO::PARAM_INT);
+
+        // Query is executed
+        $genreStatement->execute();
+
+        // Genre info is fetched
+        $genreData = $genreStatement->fetch();
+
+    if ($artistData['artist_type_id']) {
+        $typeSql = 'SELECT t.type_name FROM types t WHERE t.type_id = :type_id';
+
+        // Statement is prepared for type
+        $typeStatement = $db->prepare($typeSql);
+
+         // Querystring value is retrieved
+        $artist_type_id = $artistData['artist_type_id'];
+        $typeStatement->bindValue(':type_id', $artist_type_id, PDO::PARAM_INT);
+
+        // Query is executed
+        $typeStatement->execute();
+
+        // Type info is fetched
+        $typeData = $typeStatement->fetch();
+       }
+    }
+}
 } catch (PDOException $e) {
     die($e->getMessage());
 }
 
-try {
-    $artistSQL = 'SELECT * FROM artists WHERE artist_id=:artist_id';
-
-    // statement is prepared for artists
-    $artistStatement = $db->prepare($artistSQL);
-
-    // querystring value is retrieved
-    $artist_id = $s['artist_id']; 
-    $artistStatement->bindValue(':artist_id', $artist_id, PDO::PARAM_INT);
-
-    // query is executed
-    $artistStatement->execute();
-
-    // artist info is fetched
-    $artistData = $artistStatement->fetch();
-} catch (PDOException $e) {
-    die($e->getMessage());
-}
-
-try {
-    $genreSQL = 'SELECT * FROM genres WHERE genre_id=:genre_id';
-
-    // statement is prepared for genre
-    $genreStatement = $db->prepare($genreSQL);
-
-    // querystring value is retrieved
-    $genre_id = $s['genre_id']; 
-    $genreStatement->bindValue(':genre_id', $genre_id, PDO::PARAM_INT);
-
-    // query is executed
-    $genreStatement->execute();
-
-    // genre info is fetched
-    $genreData = $genreStatement->fetch();
-
-} catch (PDOException $e) {
-    die($e->getMessage());
-}
-
-try {
-    $typeSql = 'SELECT t.type_name FROM types t INNER JOIN artists a ON t.type_id = a.artist_type_id WHERE a.artist_id=:artist_id';
-
-    // statement is prepared for type
-    $typeStatement = $db->prepare($typeSql);
-
-    // querystring value is retrieved
-    $artist_id = $s['artist_id']; 
-    $typeStatement->bindValue(':artist_id', $artist_id, PDO::PARAM_INT);
-
-    // query is executed
-    $typeStatement->execute();
-
-    // type info is fetched
-    $typeData = $typeStatement->fetch();
-
-} catch (PDOException $e) {
-    die($e->getMessage());
-}
-
-//converts seconds to m:ss format
+// Converts seconds to m:ss format
 function secondsToMinutesSeconds($seconds) {
     $minutes = floor($seconds / 60);
     $remainingSeconds = $seconds % 60;
@@ -122,24 +114,26 @@ function secondsToMinutesSeconds($seconds) {
         <!-- Your song information content goes here -->
         
         <!-- Verify contents of database -->
-        <?php if ($s) : ?>
-        <p><?php echo htmlspecialchars($s['title']); ?>, <?php echo htmlspecialchars($artistData['artist_name']); ?>,
-        <?php if ($typeData !== false) : ?>
+        <?php if ($songData) : ?>
+        <p><?php echo htmlspecialchars($songData['title']); ?>, <?php echo htmlspecialchars($artistData['artist_name']); ?>,
+        <?php if ($typeData !== false && isset($typeData['type_name'])) : ?>
         <?php echo htmlspecialchars($typeData['type_name']); ?>,
         <?php endif; ?>
+        <?php if ($genreData !== false && isset($genreData['genre_name'])) : ?>
         <?php echo htmlspecialchars($genreData['genre_name']); ?>, 
-        <?php echo htmlspecialchars($s['year']); ?>,
-        <?php echo secondsToMinutesSeconds($s['duration']); ?></p>
+        <?php endif; ?>
+        <?php echo htmlspecialchars($songData['year']); ?>,
+        <?php echo secondsToMinutesSeconds($songData['duration']); ?></p>
     <ul>
-        <li><strong>BPM:</strong> <?php echo htmlspecialchars($s['bpm']); ?></li>
-        <li><strong>Energy:</strong> <?php echo htmlspecialchars($s['energy']); ?></li>
-        <li><strong>Danceability:</strong> <?php echo htmlspecialchars($s['danceability']); ?></li>
-        <li><strong>Liveness:</strong> <?php echo htmlspecialchars($s['liveness']); ?></li>
-        <li><strong>Valence:</strong> <?php echo htmlspecialchars($s['valence']); ?></li>
-        <li><strong>Acousticness:</strong> <?php echo htmlspecialchars($s['acousticness']); ?></li>
-        <li><strong>Speechiness:</strong> <?php echo htmlspecialchars($s['speechiness']); ?></li>
-        <li><strong>Popularity:</strong> <?php echo htmlspecialchars($s['popularity']); ?></li>
-        <li><strong>Loudness:</strong> <?php echo htmlspecialchars($s['loudness']); ?></li>
+        <li><strong>BPM:</strong> <?php echo htmlspecialchars($songData['bpm']); ?></li>
+        <li><strong>Energy:</strong> <?php echo htmlspecialchars($songData['energy']); ?></li>
+        <li><strong>Danceability:</strong> <?php echo htmlspecialchars($songData['danceability']); ?></li>
+        <li><strong>Liveness:</strong> <?php echo htmlspecialchars($songData['liveness']); ?></li>
+        <li><strong>Valence:</strong> <?php echo htmlspecialchars($songData['valence']); ?></li>
+        <li><strong>Acousticness:</strong> <?php echo htmlspecialchars($songData['acousticness']); ?></li>
+        <li><strong>Speechiness:</strong> <?php echo htmlspecialchars($songData['speechiness']); ?></li>
+        <li><strong>Popularity:</strong> <?php echo htmlspecialchars($songData['popularity']); ?></li>
+        <li><strong>Loudness:</strong> <?php echo htmlspecialchars($songData['loudness']); ?></li>
     </ul>
     <?php else : ?>
     <li>No song found</li>
