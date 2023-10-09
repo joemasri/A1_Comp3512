@@ -133,7 +133,6 @@ function secondsToMinutesSeconds($seconds) {
         <li><strong>Acousticness:</strong> <?php echo htmlspecialchars($songData['acousticness']); ?></li>
         <li><strong>Speechiness:</strong> <?php echo htmlspecialchars($songData['speechiness']); ?></li>
         <li><strong>Popularity:</strong> <?php echo htmlspecialchars($songData['popularity']); ?></li>
-        <li><strong>Loudness:</strong> <?php echo htmlspecialchars($songData['loudness']); ?></li>
     </ul>
     <?php else : ?>
     <li>No song found</li>
