@@ -1,23 +1,67 @@
 <?php
 
-$db = new PDO('sqlite:./data/music.db');
+// establish a database connection
+try {
+    $db = new PDO('sqlite:./data/music.db');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die('Database connection failed: ' . $e->getMessage());
+}
 
 try {
-    $sql = 'SELECT * FROM songs WHERE song_id=:si';
+    $songSQL = 'SELECT * FROM songs WHERE song_id=:si';
     
-    //statement is prepred
-    $statement= $db->prepare($sql);
+    // statement is prepared for songs
+    $statement = $db->prepare($songSQL);
 
-    //value is retrieved from querystring
-    $song_id = filter_input(INPUT_GET, 'song_id');
+    // querystring value is retrieved
+    $song_id = filter_input(INPUT_GET, 'song_id', FILTER_VALIDATE_INT);
     $statement->bindValue(':si', $song_id, PDO::PARAM_INT);
 
-    //query is executed
+    // query is executed
     $statement->execute();
 
-    //array of songs are made
+    // song info is fetched
     $s = $statement->fetch();
-    $db = null;
+} catch (PDOException $e) {
+    die($e->getMessage());
+}
+
+try {
+    $artistSQL = 'SELECT * FROM artists WHERE artist_id=:artist_id';
+
+    // statement is prepared for artists
+    $artistStatement = $db->prepare($artistSQL);
+
+    // querystring value is retrieved
+    $artist_id = $s['artist_id']; 
+    $artistStatement->bindValue(':artist_id', $artist_id, PDO::PARAM_INT);
+
+    // query is executed
+    $artistStatement->execute();
+
+    // artist info is fetched
+    $artistData = $artistStatement->fetch();
+} catch (PDOException $e) {
+    die($e->getMessage());
+}
+
+try {
+    $genreSQL = 'SELECT * FROM genres WHERE genre_id=:genre_id';
+
+    // statement is prepared for genre
+    $genreStatement = $db->prepare($genreSQL);
+
+    // querystring value is retrieved
+    $genre_id = $s['genre_id']; 
+    $genreStatement->bindValue(':genre_id', $genre_id, PDO::PARAM_INT);
+
+    // query is executed
+    $genreStatement->execute();
+
+    // genre info is fetched
+    $genreData = $genreStatement->fetch();
+
 } catch (PDOException $e) {
     die($e->getMessage());
 }
@@ -52,7 +96,8 @@ try {
         
         <!--verify contents of database-->
         <?php if ($s) : ?>
-        <p><?php echo htmlspecialchars ($s['title']); ?>, </p>
+        <!--contents of database are displayed-->
+        <p><?php echo htmlspecialchars ($s['title']); ?>, <?php echo htmlspecialchars ($artistData['artist_name']); ?>, <?php echo htmlspecialchars ($genreData['genre_name']); ?>, <?php echo htmlspecialchars ($s['year']); ?></p>
         <ul>
             <li><strong>BPM:</strong> <?php echo htmlspecialchars($s['bpm']); ?></li>
             <li><strong>Energy:</strong> <?php echo htmlspecialchars($s['energy']); ?></li>
