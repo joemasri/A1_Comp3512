@@ -102,9 +102,9 @@ function secondsToMinutesSeconds($seconds) {
 
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Browse</a></li>
-            <li><a href="#">Search</a></li>
+            <li><a href="Home.php">Home</a></li>
+            <li><a href="Browse.php">Browse</a></li>
+            <li><a href="Search.php">Search</a></li>
             <li><a href="#">About Us</a></li>
         </ul>
     </nav>
