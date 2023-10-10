@@ -23,6 +23,12 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
     if (!empty($_GET['artistlist'])) {
         $query .= " AND artists.artist_name LIKE '%" . $_GET['artistlist'] . "%'";
     }
+    if (!empty($_GET['genrelist'])) {
+        $query .= " AND genres.genre_name = '" . $_GET['genrelist'] . "'";
+    }
+    if (!empty($_GET['syear'])) {
+        $query .= " AND songs.year = " . $_GET['syear'];
+    }
 
     $stmt = $db->query($query);
 
