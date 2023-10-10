@@ -1,3 +1,20 @@
+<?php
+// Establish a database connection
+try {
+    $db = new PDO('sqlite:./data/music.db');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die('Database connection failed: ' . $e->getMessage());
+}
+
+if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelist']) || isset($_GET['syear'])) {
+    // Query based on search criteria
+} else {
+    // If no query string parameters, display all songs
+}
+
+?>
+
 <!-- Browse page -->
 <!DOCTYPE html>
 <html>
@@ -22,7 +39,25 @@
         </ul>
     </nav>
 
-
+    <section>
+    <h1>Song List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Year</th>
+                <th>Genre</th>
+                <th>Popularity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            
+            ?>
+        </tbody>
+    </table>
+</section>
 
 
     <footer>
