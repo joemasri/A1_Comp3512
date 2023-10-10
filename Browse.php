@@ -8,9 +8,26 @@ try {
 }
 
 if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelist']) || isset($_GET['syear'])) {
+    
     // Query based on search criteria
+    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
+              FROM songs
+              JOIN artists ON songs.artist_id = artists.artist_id
+              JOIN genres ON songs.genre_id = genres.genre_id
+              WHERE 1";
+    
+    if (!empty($_GET['title'])) {
+        $query .= " AND songs.title LIKE '%" . $_GET['title'] . "%'";
+    }
+
+    
 } else {
     // If no query string parameters, display all songs
+    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
+              FROM songs
+              JOIN artists ON songs.artist_id = artists.artist_id
+              JOIN genres ON songs.genre_id = genres.genre_id";
+    $stmt = $db->query($query);
 }
 
 ?>
@@ -53,7 +70,15 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         </thead>
         <tbody>
             <?php
-            
+             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "<tr>";
+                echo "<td>{$row['title']}</td>";
+                echo "<td>{$row['artist_name']}</td>";
+                echo "<td>{$row['year']}</td>";
+                echo "<td>{$row['genre_name']}</td>";
+                echo "<td>{$row['popularity']}</td>";
+                echo "</tr>";
+            }
             ?>
         </tbody>
     </table>
