@@ -9,7 +9,7 @@ try {
 }
 
 // Query the database to retrieve artist names
-$queryArtists = "SELECT DISTINCT artist_name FROM artists"; // Replace your_table_name with the actual table name
+$queryArtists = "SELECT DISTINCT artist_name FROM artists"; 
 $stmtArtists = $db->query($queryArtists);
 
 // Query the database to retrieve genre names
@@ -46,7 +46,7 @@ $stmtGenres = $db->query($queryGenres);
 
     <!-- Title search -->
     <label for="title">Title </label>
-    <input type="text" id="fname" name="fname"><br><br>
+    <input type="text" id="songtitle" name="title"><br><br>
     
     <!-- Select form for artist -->
     <label for="artist">Artist:</label>
@@ -75,8 +75,8 @@ $stmtGenres = $db->query($queryGenres);
     </select><br><br>
 
     <!-- Year search -->
-    <label for="title">Title </label>
-    <input type="text" id="fname" name="fname"><br><br>
+    <label for="year">Year </label>
+    <input type="text" id="songyear" name="syear"><br><br>
 
     <input type="submit" value="Search">
     </form>
