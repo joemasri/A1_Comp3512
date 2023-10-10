@@ -16,11 +16,16 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
               JOIN genres ON songs.genre_id = genres.genre_id
               WHERE 1";
     
+    // Add conditions based on search parameters
     if (!empty($_GET['title'])) {
         $query .= " AND songs.title LIKE '%" . $_GET['title'] . "%'";
     }
+    if (!empty($_GET['artistlist'])) {
+        $query .= " AND artists.artist_name LIKE '%" . $_GET['artistlist'] . "%'";
+    }
 
-    
+    $stmt = $db->query($query);
+
 } else {
     // If no query string parameters, display all songs
     $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
