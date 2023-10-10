@@ -9,8 +9,12 @@ try {
 }
 
 // Query the database to retrieve artist names
-$query = "SELECT DISTINCT artist_name FROM artists"; // Replace your_table_name with the actual table name
-$stmt = $db->query($query);
+$queryArtists = "SELECT DISTINCT artist_name FROM artists"; // Replace your_table_name with the actual table name
+$stmtArtists = $db->query($queryArtists);
+
+// Query the database to retrieve genre names
+$queryGenres = "SELECT DISTINCT genre_name FROM genres";
+$stmtGenres = $db->query($queryGenres);
 
 ?>
 
@@ -38,21 +42,42 @@ $stmt = $db->query($query);
 
     <section>
     <h1>Song Search</h1>
-    <form action="/action_page.php" method="GET">
+    <form action="./Browse.php" method="GET">
+
+    <!-- Title search -->
     <label for="title">Title </label>
     <input type="text" id="fname" name="fname"><br><br>
+    
+    <!-- Select form for artist -->
     <label for="artist">Artist:</label>
     <select id="artist" name="artistlist">
     <option value=""></option>
     <?php
     // Loop through the results and generate the <option> elements
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $stmtArtists->fetch(PDO::FETCH_ASSOC)) {
     $artistName = $row['artist_name'];
     echo "<option value='$artistName'>$artistName</option>";
     }
     ?>
     </select><br><br>
-    
+
+    <!-- Select form for genre -->
+    <label for="genre">Genre:</label>
+    <select id="genre" name="genrelist">
+    <option value=""></option>
+    <?php
+    // Loop through the results and generate the <option> elements for genres
+    while ($rowGenres = $stmtGenres->fetch(PDO::FETCH_ASSOC)) {
+        $genreName = $rowGenres['genre_name'];
+        echo "<option value='$genreName'>$genreName</option>";
+    }
+    ?>
+    </select><br><br>
+
+    <!-- Year search -->
+    <label for="title">Title </label>
+    <input type="text" id="fname" name="fname"><br><br>
+
     <input type="submit" value="Search">
     </form>
     </section>
