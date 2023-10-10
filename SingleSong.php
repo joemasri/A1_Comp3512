@@ -100,6 +100,7 @@ function secondsToMinutesSeconds($seconds) {
         <h4>Zee El Masri, Andrew Yu</h4>
     </header>
 
+     <!-- Header Items -->
     <nav>
         <ul>
             <li><a href="Home.php">Home</a></li>
