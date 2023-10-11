@@ -18,6 +18,10 @@ header {
 header h1 {
     font-size: 24px;
 }
+
+h2 {
+    text-align: center;
+}
 .subtitle {
     font-size: 18px;
     font-style: italic;
@@ -97,7 +101,7 @@ footer {
     float: left;
 }
 
-.box:nth-child(4n+2) {
+.box:nth-child(4n+3) {
     clear: both;
 }
 
