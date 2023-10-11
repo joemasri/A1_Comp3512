@@ -87,6 +87,7 @@ function secondsToMinutesSeconds($seconds) {
 
 ?>
 
+<!-- Single song page -->
 <!DOCTYPE html>
 <html>
 <head>

@@ -22,9 +22,17 @@
         </ul>
     </nav>
 
-
-    
-
+    <section>
+    <h1>Home Page</h1>
+    <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+    </section>
 
     <footer>
         <h2>Footer</h2>
