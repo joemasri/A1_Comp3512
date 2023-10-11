@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="SingleSongStyles.css">
+    <link rel="stylesheet" type="text/css" href="HomeStyles.css">
 </head>
 <body>
     <header>
@@ -22,12 +22,17 @@
         </ul>
     </nav>
 
-
-    
-    <!-- Footer section of page -->
-    <footer>
-        <h2>Footer</h2>
-    </footer>
+    <section>
+    <h1>Home Page</h1>
+    <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+         <div class="box"></div>
+    </section>
 
     <footer>
         <p>Course: COMP 3512</p>

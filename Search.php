@@ -85,10 +85,6 @@ $stmtGenres = $db->query($queryGenres);
 
     <!-- Footer section of page -->
     <footer>
-        <h2>Footer</h2>
-    </footer>
-
-    <footer>
         <p>Course: COMP 3512</p>
         <p>&copy; Zee El-Masri, Andrew Yu</p>
         <p>

@@ -87,6 +87,7 @@ function secondsToMinutesSeconds($seconds) {
 
 ?>
 
+<!-- Single song page -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,10 +143,6 @@ function secondsToMinutesSeconds($seconds) {
     </section>
 
     <!-- Footer section of page -->
-    <footer>
-        <h2>Footer</h2>
-    </footer>
-
     <footer>
         <p>Course: COMP 3512</p>
         <p>&copy; Zee El-Masri, Andrew Yu</p>

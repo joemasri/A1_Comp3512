@@ -134,5 +134,6 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
             <a class="footer-link" href="https://github.com/ayu381">Group Member 2</a>
         </p>
     </footer>
+
 </body>
 </html>
