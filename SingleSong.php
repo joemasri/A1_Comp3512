@@ -142,6 +142,7 @@ function secondsToMinutesSeconds($seconds) {
     </ul>
     </section>
 
+    <!-- Footer section of page -->
     <footer>
         <p>Course: COMP 3512</p>
         <p>&copy; Zee El-Masri, Andrew Yu</p>

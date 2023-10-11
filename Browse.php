@@ -10,7 +10,7 @@ try {
 if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelist']) || isset($_GET['syear'])) {
     
     // Query based on search criteria
-    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
+    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name
               FROM songs
               JOIN artists ON songs.artist_id = artists.artist_id
               JOIN genres ON songs.genre_id = genres.genre_id
@@ -34,7 +34,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 
     // Check if "Show All" button is clicked
     if (isset($_GET['showall'])) {
-    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
+    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name
               FROM songs
               JOIN artists ON songs.artist_id = artists.artist_id
               JOIN genres ON songs.genre_id = genres.genre_id";
@@ -42,7 +42,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 
 } else {
     // If no query string parameters, display all songs
-    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
+    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name
               FROM songs
               JOIN artists ON songs.artist_id = artists.artist_id
               JOIN genres ON songs.genre_id = genres.genre_id";
@@ -90,24 +90,48 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
                 <th>Artist</th>
                 <th>Year</th>
                 <th>Genre</th>
-                <th>Popularity</th>
+
+                <th>
+                <form action="./Browse.php" method="GET">
+                    <input class="" type="submit" name="addToFav" value="Add To Favourites">
+                </form>
+                </th>
+                
+                <th>
+                <form action="./Browse.php" method="GET">
+                    <input class="" type="submit" name="viewBtn" value="View">
+                </form>
+                </th>
+
             </tr>
         </thead>
         <tbody>
             <?php
              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                // Displays first 25 characters only
+                $title = $row['title'];
+                if (strlen($title) > 25) {
+                    $title = substr($title, 0, 25) . '&hellip;';
+                }
+
+                // Echos data in each row
                 echo "<tr>";
-                echo "<td>{$row['title']}</td>";
+                echo "<td>{$title}</td>";
                 echo "<td>{$row['artist_name']}</td>";
                 echo "<td>{$row['year']}</td>";
                 echo "<td>{$row['genre_name']}</td>";
-                echo "<td>{$row['popularity']}</td>";
                 echo "</tr>";
             }
             ?>
         </tbody>
     </table>
 </section>
+
+    <!-- Footer section of page -->
+    <footer>
+        <h2>Footer</h2>
+    </footer>
 
     <footer>
         <p>Course: COMP 3512</p>

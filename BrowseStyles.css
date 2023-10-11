@@ -111,6 +111,14 @@ footer {
 /* Show All button */
 .show-all-button {
     float: right;
-    margin: 20px;
+    background-color: aqua;
+    margin-top: 25px;
+    
+}
+
+.remove-all-button {
+    float: right;
+    background-color: red;
+    margin-top: 25px;
 }
 
