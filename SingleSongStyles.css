@@ -46,6 +46,7 @@ nav ul li a:hover {
 /* Section styles */
 section {
     padding: 20px;
+    margin-bottom: 50px;
 }
 
 /* Footer styles */
@@ -54,7 +55,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
@@ -63,3 +64,24 @@ footer {
     text-decoration: none;
     margin: 0 10px;
 }
+
+/* Set up vertical dividers for both thead and tbody */
+.song-table {
+    border-collapse: collapse; 
+    width: 100%;
+}
+
+/* Style the table header */
+.song-table thead th {
+    border: 1px solid black; 
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style the table cells */
+.song-table tbody td {
+    border: 1px solid black; 
+    padding: 10px;
+    text-align: center;
+}
+

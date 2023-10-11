@@ -67,9 +67,9 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         </ul>
     </nav>
 
-    <section>
+    <section class="table-container">
     <h1>Song List</h1>
-    <table>
+    <table class="song-table">
         <thead>
             <tr>
                 <th>Title</th>
