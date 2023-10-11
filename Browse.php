@@ -108,8 +108,16 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         <tbody>
             <?php
              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                // Displays first 25 characters only
+                $title = $row['title'];
+                if (strlen($title) > 25) {
+                    $title = substr($title, 0, 25) . '&hellip;';
+                }
+
+                // Echos data in each row
                 echo "<tr>";
-                echo "<td>{$row['title']}</td>";
+                echo "<td>{$title}</td>";
                 echo "<td>{$row['artist_name']}</td>";
                 echo "<td>{$row['year']}</td>";
                 echo "<td>{$row['genre_name']}</td>";
