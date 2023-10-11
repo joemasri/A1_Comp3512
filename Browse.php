@@ -57,7 +57,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="SingleSongStyles.css">
+    <link rel="stylesheet" type="text/css" href="BrowseStyles.css">
 </head>
 <body>
     <header>
@@ -75,11 +75,13 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         </ul>
     </nav>
 
+    <section class="table-container">
+
+    <!-- Show All Button -->
     <form action="./Browse.php" method="GET">
-        <input type="submit" name="showall" value="Show All">
+        <input class="show-all-button" type="submit" name="showall" value="Show All">
     </form>
 
-    <section class="table-container">
     <h1>Song List</h1>
     <table class="song-table">
         <thead>
