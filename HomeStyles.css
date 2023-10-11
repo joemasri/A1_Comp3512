@@ -65,5 +65,36 @@ footer {
     margin: 0 10px;
 }
 
+/* Set up vertical dividers for both thead and tbody */
+.song-table {
+    border-collapse: collapse; 
+    width: 100%;
+}
 
+/* Style the table header */
+.song-table thead th {
+    border: 1px solid black; 
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style the table cells */
+.song-table tbody td {
+    border: 1px solid black; 
+    padding: 10px;
+    text-align: center;
+}
+
+/* Define the CSS styles for the boxes */
+.box {
+    width: 300px;
+    height: 300px;
+    background-color: #D3D3D3;
+    margin: 10px;
+    float: left;
+}
+
+.box:nth-child(4n+2) {
+    clear: both;
+}
 
