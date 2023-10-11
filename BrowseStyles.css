@@ -1,0 +1,93 @@
+/* CSS styles for the entire webpage */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+header h1 {
+    font-size: 24px;
+}
+.subtitle {
+    font-size: 18px;
+    font-style: italic;
+    margin-top: -10px;
+}
+
+/* Navigation styles */
+nav {
+    background-color: #444;
+    text-align: center;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+nav ul li a:hover {
+    color: #ccc;
+}
+
+/* Section styles */
+section {
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Set up vertical dividers for both thead and tbody */
+.song-table {
+    border-collapse: collapse; 
+    width: 100%;
+}
+
+/* Style the table header */
+.song-table thead th {
+    border: 1px solid black; 
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style the table cells */
+.song-table tbody td {
+    border: 1px solid black; 
+    padding: 10px;
+    text-align: center;
+}
+
+/* Show All button */
+.show-all-button {
+    float: right;
+    margin: 20px;
+}
+

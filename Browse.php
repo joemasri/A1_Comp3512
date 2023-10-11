@@ -32,6 +32,14 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 
     $stmt = $db->query($query);
 
+    // Check if "Show All" button is clicked
+    if (isset($_GET['showall'])) {
+    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
+              FROM songs
+              JOIN artists ON songs.artist_id = artists.artist_id
+              JOIN genres ON songs.genre_id = genres.genre_id";
+}
+
 } else {
     // If no query string parameters, display all songs
     $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name, songs.popularity
@@ -49,7 +57,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="SingleSongStyles.css">
+    <link rel="stylesheet" type="text/css" href="BrowseStyles.css">
 </head>
 <body>
     <header>
@@ -68,6 +76,12 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
     </nav>
 
     <section class="table-container">
+
+    <!-- Show All Button -->
+    <form action="./Browse.php" method="GET">
+        <input class="show-all-button" type="submit" name="showall" value="Show All">
+    </form>
+
     <h1>Song List</h1>
     <table class="song-table">
         <thead>
