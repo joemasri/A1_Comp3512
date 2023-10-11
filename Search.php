@@ -46,11 +46,11 @@ $stmtGenres = $db->query($queryGenres);
     <form action="./Browse.php" method="GET">
 
     <!-- Title search -->
-    <label for="title">Title </label>
+    <label for="title"><strong>Title: </strong></label>
     <input type="text" id="songtitle" name="title"><br><br>
     
     <!-- Select form for artist -->
-    <label for="artist">Artist:</label>
+    <label for="artist"><strong>Artist: </label>
     <select id="artist" name="artistlist">
     <option value=""></option>
     <?php
@@ -63,7 +63,7 @@ $stmtGenres = $db->query($queryGenres);
     </select><br><br>
 
     <!-- Select form for genre -->
-    <label for="genre">Genre:</label>
+    <label for="genre">Genre: </strong></label>
     <select id="genre" name="genrelist">
     <option value=""></option>
     <?php
@@ -76,7 +76,7 @@ $stmtGenres = $db->query($queryGenres);
     </select><br><br>
 
     <!-- Year search -->
-    <label for="year">Year </label>
+    <label for="year"><strong>Year: </strong></label>
     <input type="text" id="songyear" name="syear"><br><br>
 
     <input type="submit" value="Search">
