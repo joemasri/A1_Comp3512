@@ -122,7 +122,16 @@ function displayOneHitWonders($db) {
 
     <section>
     <h1>Home Page</h1>
-    <p></p>
+    <p>
+        The assignment involves creating a web application for browsing and searching a music database. Using multiple PHP pages that all interact with eachother to create an aesthetically pleasing and functioning program.<br><br>
+
+        Group Members: Zee El-Masri, Andrew Yu <br><br>
+
+        Course Name: Comp 3512 <br>
+
+        GitHub Link: <a href="https://github.com/joemasri/A1_Comp3512">https://github.com/joemasri/A1_Comp3512</a>
+
+    </p>
     <div class="box">
         <h2>Top Genres</h2>
         <?php displayTopGenres($db); ?>
@@ -160,6 +169,9 @@ function displayOneHitWonders($db) {
             <a class="footer-link" href="https://github.com/joemasri/A1_Comp3512.git">GitHub Repo</a>
             <a class="footer-link" href="https://github.com/joemasri">Group Member 1</a>
             <a class="footer-link" href="https://github.com/ayu381">Group Member 2</a>
+        </p>
+        <p>
+            The assignment involves creating a web application for browsing and searching a music database. Using multiple PHP pages that all interact with eachother to create an aesthetically pleasing and functioning program.
         </p>
     </footer>
 </body>
