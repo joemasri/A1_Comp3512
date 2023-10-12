@@ -62,12 +62,13 @@ function displayMostPopularSongs($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $formattedOutput = "{$row['artist_name']} - {$row['title']}: Score {$row['popularity']}";
+        $formattedOutput = "{$row['artist_name']} - {$row['title']} - Popularity Score: {$row['popularity']}";
         echo "<li>{$formattedOutput}</li>";
     }
     echo '</ul>';
 }
 
+// Function for displaying the most biggest one hit wonders
 function displayOneHitWonders($db) {
     $query = "
         SELECT s.song_id, s.title, s.popularity, a.artist_id, a.artist_name
@@ -88,7 +89,99 @@ function displayOneHitWonders($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $formattedOutput = "{$row['artist_name']} - {$row['title']}: Score {$row['popularity']}";
+        $formattedOutput = "{$row['artist_name']} - {$row['title']} - One Hit Wonder Score: {$row['popularity']}";
+        echo "<li>{$formattedOutput}</li>";
+    }
+    echo '</ul>';
+}
+
+// Function for displaying the longest acoustic songs
+function displayLongestAcousticSongs($db) {
+    $query = "
+        SELECT s.title, s.duration, s.acousticness, a.artist_name
+        FROM songs AS s
+        JOIN artists AS a ON s.artist_id = a.artist_id
+        WHERE s.acousticness > 40
+        ORDER BY s.duration DESC, s.title
+        LIMIT 10
+    ";
+
+    $stmt = $db->query($query);
+
+    echo '<ul>';
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        // Convert duration to m:ss format with leading zeros
+        $durationMinutes = floor($row['duration'] / 60);
+        $durationSeconds = sprintf("%02d", $row['duration'] % 60);
+
+        $formattedOutput = "{$row['artist_name']} - {$row['title']} - Duration: {$durationMinutes}:{$durationSeconds} (Acousticness: {$row['acousticness']}%)";
+        echo "<li>{$formattedOutput}</li>";
+    }
+    echo '</ul>';
+}
+
+// Function for displaying the most club-friendly songs
+function displayAtTheClub($db) {
+    $query = "
+        SELECT s.song_id, s.title, s.energy, s.danceability, a.artist_name,
+        (s.danceability * 1.6 + s.energy * 1.4) AS club_friendly_score
+        FROM songs AS s
+        JOIN artists AS a ON s.artist_id = a.artist_id
+        WHERE s.danceability > 80
+        ORDER BY club_friendly_score DESC
+        LIMIT 10
+    ";
+
+    $stmt = $db->query($query);
+
+    echo '<ul>';
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $formattedOutput = "{$row['artist_name']} - {$row['title']} - Club Friendly Score: {$row['club_friendly_score']}";
+        echo "<li>{$formattedOutput}</li>";
+    }
+    echo '</ul>';
+}
+
+// Function for displaying the best songs for running
+function displayRunningSongs($db) {
+    $query = "
+        SELECT s.song_id, s.title, s.energy, s.valence, s.bpm, a.artist_name,
+        (s.energy * 1.3 + s.valence * 1.6) AS running_score
+        FROM songs AS s
+        JOIN artists AS a ON s.artist_id = a.artist_id
+        WHERE s.bpm >= 120 AND s.bpm <= 125
+        ORDER BY running_score DESC
+        LIMIT 10
+    ";
+
+    $stmt = $db->query($query);
+
+    echo '<ul>';
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $formattedOutput = "{$row['artist_name']} - {$row['title']} - Running Score: {$row['running_score']}";
+        echo "<li>{$formattedOutput}</li>";
+    }
+    echo '</ul>';
+}
+
+// Function for displaying the best songs for studying
+function displayStudying($db) {
+    $query = "
+        SELECT s.song_id, s.title, s.bpm, s.acousticness, s.valence, s.speechiness, a.artist_name,
+        (s.acousticness * 0.8) + (100 - s.speechiness) + (100 - s.valence) AS studying_score
+        FROM songs AS s
+        JOIN artists AS a ON s.artist_id = a.artist_id
+        WHERE s.bpm >= 100 AND s.bpm <= 115
+        AND s.speechiness >= 1 AND s.speechiness <= 20
+        ORDER BY studying_score DESC
+        LIMIT 10
+    ";
+
+    $stmt = $db->query($query);
+
+    echo '<ul>';
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $formattedOutput = "{$row['artist_name']} - {$row['title']} - Studying Score: {$row['studying_score']}";
         echo "<li>{$formattedOutput}</li>";
     }
     echo '</ul>';
@@ -141,15 +234,19 @@ function displayOneHitWonders($db) {
     </div>
     <div class="box">
         <h2>Longest Acoustic Songs</h2>
+        <?php displayLongestAcousticSongs($db); ?>
     </div>
     <div class="box">
         <h2>At The Club</h2>
+        <?php displayAtTheClub($db); ?>
     </div>
     <div class="box">
         <h2>Running Songs</h2>
+        <?php displayRunningSongs($db); ?>
     </div>
     <div class="box">
         <h2>Studying</h2>
+        <?php displayStudying($db); ?>
     </div>
     </section>
 
