@@ -105,5 +105,10 @@ footer {
     clear: both;
 }
 
+/* Style for hyperlinks */
+a {
+    color: black; 
+    text-decoration: none; 
+}
 
 
