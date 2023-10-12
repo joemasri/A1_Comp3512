@@ -61,7 +61,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 </head>
 <body>
     <header>
-        <h1>Header</h1>
+        <h1>COMP 3512 Assign1</h1>
         <h4>Zee El Masri, Andrew Yu</h4>
     </header>
 
