@@ -15,7 +15,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="BrowseStyles.css">
+    <link rel="stylesheet" type="text/css" href="FavoritesStyles.css">
 </head>
 <body>
     <header>
