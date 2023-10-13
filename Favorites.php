@@ -15,7 +15,7 @@ $favoriteSongs = [];
 
 foreach ($_SESSION['favorites'] as $song_id) {
     
-    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name FROM songs
+    $query = "SELECT songs.song_id, songs.title, artists.artist_name, songs.year, genres.genre_name FROM songs
               JOIN artists ON songs.artist_id = artists.artist_id
               JOIN genres ON songs.genre_id = genres.genre_id
               WHERE songs.song_id = :song_id";
@@ -28,6 +28,7 @@ foreach ($_SESSION['favorites'] as $song_id) {
 }
 
 }
+
 ?>
 
 <!-- Favourites page -->
@@ -56,7 +57,7 @@ foreach ($_SESSION['favorites'] as $song_id) {
 
     <section class="table-container">
 
-<!-- Show All Button -->
+<!-- Remove All Button -->
 <form action="./Favorites.php" method="GET">
     <input class="remove-all-button" type="submit" name="removeall" value="Remove All">
 </form>
@@ -69,19 +70,8 @@ foreach ($_SESSION['favorites'] as $song_id) {
             <th>Artist</th>
             <th>Year</th>
             <th>Genre</th>
-
-            <th>
-            <form action="./Favorites.php" method="GET">
-                <input class="" type="submit" name="RemoveBtn" value="Remove">
-            </form>
-            </th>
-            
-            <th>
-            <form action="./Favorites.php" method="GET">
-                <input class="" type="submit" name="viewBtn" value="View">
-            </form>
-            </th>
-
+            <th>Remove</th>
+            <th>View</th>
         </tr>
     </thead>
     <tbody>
@@ -93,10 +83,21 @@ foreach ($_SESSION['favorites'] as $song_id) {
                 echo "<td>{$song['artist_name']}</td>";
                 echo "<td>{$song['year']}</td>";
                 echo "<td>{$song['genre_name']}</td>";
+                echo "<td>";
+                echo '<form action="./Favorites.php" method="GET">';
+                echo '<input class="" type="submit" name="RemoveBtn" value="Remove">';
+                echo "</form>";
+                echo "</td>";
+                echo "<td>";
+                echo '<form action="SingleSong.php" method="GET">';
+                echo '<input type="hidden" name="song_id" value="' . $song['song_id'] . '">';
+                echo '<input class="" type="submit" name="viewBtn" value="View">';
+                echo "</form>";
+                echo "</td>";
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='4'>No favorite songs available</td></tr>";
+            echo "<tr><td colspan='6'>No favorite songs available</td></tr>";
         }
         ?>
     </tbody>
