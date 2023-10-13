@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+
+if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
 // Establish a database connection
 try {
     $db = new PDO('sqlite:./data/music.db');
@@ -7,6 +11,23 @@ try {
     die('Database connection failed: ' . $e->getMessage());
 }
 
+$favoriteSongs = [];
+
+foreach ($_SESSION['favorites'] as $song_id) {
+    
+    $query = "SELECT songs.title, artists.artist_name, songs.year, genres.genre_name FROM songs
+              JOIN artists ON songs.artist_id = artists.artist_id
+              JOIN genres ON songs.genre_id = genres.genre_id
+              WHERE songs.song_id = :song_id";
+
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':song_id', $song_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $favoriteSongs[] = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+}
 ?>
 
 <!-- Favourites page -->
@@ -65,8 +86,18 @@ try {
     </thead>
     <tbody>
         <?php
-         // Add PHP Code Here
-
+         if (isset($favoriteSongs) && is_array($favoriteSongs)) {
+            foreach ($favoriteSongs as $song) {
+                echo "<tr>";
+                echo "<td>{$song['title']}</td>";
+                echo "<td>{$song['artist_name']}</td>";
+                echo "<td>{$song['year']}</td>";
+                echo "<td>{$song['genre_name']}</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='4'>No favorite songs available</td></tr>";
+        }
         ?>
     </tbody>
 </table>

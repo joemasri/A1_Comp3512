@@ -1,5 +1,6 @@
 <?php
-// Establish a database connection
+session_start();
+// Database connection
 try {
     $db = new PDO('sqlite:./data/music.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -31,13 +32,14 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 
     $stmt = $db->query($query);
 
-    // Check if "Show All" button is clicked
+    // Show All button is clicked
     if (isset($_GET['showall'])) {
     $query = "SELECT songs.song_id, songs.title, artists.artist_name, songs.year, genres.genre_name
     FROM songs
     JOIN artists ON songs.artist_id = artists.artist_id
     JOIN genres ON songs.genre_id = genres.genre_id";
 }
+
 
 } else {
     // If no query string parameters, display all songs
@@ -102,18 +104,35 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         }
 
         echo "<tr>";
-        // Create a hyperlink with the song title and song_id in the querystring
+        
+        // song title and song_id in the querystring
         echo "<td><a href='SingleSong.php?song_id={$row['song_id']}'>{$title}</a></td>";
         echo "<td>{$row['artist_name']}</td>";
         echo "<td>{$row['year']}</td>";
         echo "<td>{$row['genre_name']}</td>";
         echo "<td>";
+        
+        // Add to Favorites
         echo "<form action='./Browse.php' method='POST'>";
         echo "<input type='hidden' name='song_id' value='{$row['song_id']}'>";
         echo "<button type='submit' name='add_to_favorites'>Add To Favorites</button>";
         echo "</form>";
         echo "</td>";
-        // Add a "View" button to the new column
+
+         // AddToFav button is clicked
+        if (isset($_POST['add_to_favorites'])) {
+        $song_id = $_POST['song_id'];
+        
+        if (!isset($_SESSION['favorites'])) {
+            $_SESSION['favorites'] = [];
+        }
+        // if song not in favorites, add it
+        if (!in_array($song_id, $_SESSION['favorites'])) {
+            $_SESSION['favorites'][] = $song_id;
+        }
+    }
+
+        // View Button
         echo "<td>";
         echo "<form action='SingleSong.php' method='GET'>";
         echo "<input type='hidden' name='song_id' value='{$row['song_id']}'>";
@@ -121,6 +140,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         echo "</form>";
         echo "</td>";
         echo "</tr>";
+
     }
     ?>
 </tbody>
