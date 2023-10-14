@@ -2,33 +2,49 @@
 
 session_start();
 
+if (isset($_GET['removeall'])) {
+    // If the "Remove All" button is clicked, clear the favorites list
+    $_SESSION['favorites'] = array();
+    header("Location: Favorites.php");
+    exit;
+}
+
 if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
-// Establish a database connection
-try {
-    $db = new PDO('sqlite:./data/music.db');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die('Database connection failed: ' . $e->getMessage());
+    // Establish a database connection
+    try {
+        $db = new PDO('sqlite:./data/music.db');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die('Database connection failed: ' . $e->getMessage());
+    }
+
+    $favoriteSongs = [];
+
+    foreach ($_SESSION['favorites'] as $song_id) {
+
+        $query = "SELECT songs.song_id, songs.title, artists.artist_name, songs.year, genres.genre_name FROM songs
+                  JOIN artists ON songs.artist_id = artists.artist_id
+                  JOIN genres ON songs.genre_id = genres.genre_id
+                  WHERE songs.song_id = :song_id";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':song_id', $song_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $favoriteSongs[] = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    if (isset($_POST['remove'])) {
+        $removeSongID = $_POST['song_id'];
+        // Find and remove the specific song from the favorites array
+        if (($key = array_search($removeSongID, $_SESSION['favorites'])) !== false) {
+            unset($_SESSION['favorites'][$key]);
+        }
+        // Redirect to update the favorites list
+        header("Location: Favorites.php");
+        exit;
+    }
 }
-
-$favoriteSongs = [];
-
-foreach ($_SESSION['favorites'] as $song_id) {
-    
-    $query = "SELECT songs.song_id, songs.title, artists.artist_name, songs.year, genres.genre_name FROM songs
-              JOIN artists ON songs.artist_id = artists.artist_id
-              JOIN genres ON songs.genre_id = genres.genre_id
-              WHERE songs.song_id = :song_id";
-
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':song_id', $song_id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $favoriteSongs[] = $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-}
-
 ?>
 
 <!-- Favourites page -->
@@ -84,10 +100,13 @@ foreach ($_SESSION['favorites'] as $song_id) {
                 echo "<td>{$song['year']}</td>";
                 echo "<td>{$song['genre_name']}</td>";
                 echo "<td>";
-                echo '<form action="./Favorites.php" method="GET">';
-                echo '<input class="" type="submit" name="RemoveBtn" value="Remove">';
-                echo "</form>";
+                echo '<form action="./Favorites.php" method="POST">';
+                echo '<input type="hidden" name="song_id" value="' . $song['song_id'] . '">';
+                echo '<input class="remove-button" type="submit" name="remove" value="Remove">';
+                echo '</form>';
                 echo "</td>";
+
+                // View button
                 echo "<td>";
                 echo '<form action="SingleSong.php" method="GET">';
                 echo '<input type="hidden" name="song_id" value="' . $song['song_id'] . '">';
