@@ -115,7 +115,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         // Add to Favorites
         echo "<form action='./Browse.php' method='POST'>";
         echo "<input type='hidden' name='song_id' value='{$row['song_id']}'>";
-        echo "<button type='submit' name='add_to_favorites'>Add To Favorites</button>";
+        echo "<button type='submit' name='add_to_favorites'>Favorite</button>";
         echo "</form>";
         echo "</td>";
 

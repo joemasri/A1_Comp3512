@@ -13,11 +13,17 @@ header {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 10;
 }
 header h1 {
     font-size: 24px;
 }
+
+section h1 {
+    padding-bottom: 30px;
+
+}
+
 .subtitle {
     font-size: 18px;
     font-style: italic;
@@ -46,10 +52,12 @@ nav ul li a:hover {
     color: #ccc;
 }
 
-/* Section styles */
+/* Section */
 section {
     padding: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-image: linear-gradient(to left, rgb(29, 27, 27) , rgb(165, 35, 251)); 
 }
 
 .wrapper {
@@ -88,41 +96,59 @@ footer {
     flex: 1;
 }
 
-/* Set up vertical dividers for both thead and tbody */
+/* vertical dividers for both thead and tbody */
 .song-table {
     border-collapse: collapse; 
     width: 100%;
 }
 
-/* Style the table header */
+/* table header */
 .song-table thead th {
-    border: 1px solid black; 
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
-/* Style the table cells */
+/* table cells */
 .song-table tbody td {
-    border: 1px solid black; 
     padding: 10px;
-    text-align: center;
+    text-align: left;
+
 }
 
-/* Show All button */
+/* Show All button 
+https://html.form.guide/snippets/css-button-rounded-corners/*/
 .show-all-button {
     float: right;
-    background-color: aqua;
-    margin-top: 25px;
+    color: white;
+    width: 100px;
+    height: 35px;
+    background-color: rgb(247, 0, 255);
+    border-radius: 15px;
+    margin-top: 15px;
+    font-weight: bold;
     
 }
-
-.remove-all-button {
-    float: right;
-    background-color: red;
-    margin-top: 25px;
+.show-all-button:hover {
+    background-color: #6ff1f1;
+    color: black; 
+    cursor: pointer;
 }
 
-/* Style for hyperlinks */
+button[name='add_to_favorites'], button[name='viewBtn'] {
+    background-color: rgb(247, 0, 255);
+    border-radius: 15px;
+    width: 105px;
+    height: 30px;
+    font-weight: bold;
+}
+
+button[name='add_to_favorites']:hover, button[name='viewBtn']:hover {
+    background-color: #6ff1f1;
+    color: black; 
+    cursor: pointer;
+}
+
+/* hyperlinks */
 a {
     color: black; 
     text-decoration: none; 

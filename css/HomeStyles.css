@@ -1,17 +1,21 @@
-/* CSS styles for the entire webpage */
+/* Home Page */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
-/* Header styles */
+body p {
+    text-align: center;
+}
+
+/* Header */
 header {
     background-color: #333;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
     padding: 20px 0;
 }
@@ -19,7 +23,7 @@ header h1 {
     font-size: 24px;
 }
 
-h2 {
+h1, h2 {
     text-align: center;
 }
 .subtitle {
@@ -28,7 +32,7 @@ h2 {
     margin-top: -10px;
 }
 
-/* Navigation styles */
+/* Nav */
 nav {
     background-color: #444;
     text-align: center;
@@ -50,13 +54,18 @@ nav ul li a:hover {
     color: #ccc;
 }
 
-/* Section styles */
+/* Section 
+https://www.w3schools.com/css/css3_gradients.asp
+*/
 section {
     padding: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    justify-content: center;
+    background-image: linear-gradient(120deg, rgb(29, 27, 27) , rgb(165, 35, 251));
 }
 
-/* Footer styles */
+/* Footer */
 footer {
     background-color: #333;
     color: #fff;
@@ -72,31 +81,32 @@ footer {
     margin: 0 10px;
 }
 
-/* Set up vertical dividers for both thead and tbody */
+/* vertical dividers for both thead, tbody */
 .song-table {
     border-collapse: collapse; 
     width: 100%;
 }
 
-/* Style the table header */
+/* table header */
 .song-table thead th {
     border: 1px solid black; 
     padding: 10px;
     text-align: center;
 }
 
-/* Style the table cells */
+/* table cells */
 .song-table tbody td {
     border: 1px solid black; 
     padding: 10px;
     text-align: center;
 }
 
-/* Define the CSS styles for the boxes */
+/* boxes */
 .box {
     width: 450px;
     height: 450px;
-    background-color: #D3D3D3;
+    background-color: #7c7c7c;
+    color: black;
     margin: 10px;
     float: left;
 }
@@ -105,9 +115,10 @@ footer {
     clear: both;
 }
 
-/* Style for hyperlinks */
+/* hyperlinks */
 a {
-    color: black; 
+    color: rgb(239, 16, 255); 
+    font-weight: bold;
     text-decoration: none; 
 }
 
