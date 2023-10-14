@@ -57,10 +57,10 @@ try {
         $genreData = $genreStatement->fetch();
 
     if ($artistData['artist_type_id']) {
-        $typeSql = 'SELECT t.type_name FROM types t WHERE t.type_id = :type_id';
+        $typeSQL = 'SELECT t.type_name FROM types t WHERE t.type_id = :type_id';
 
         // Statement is prepared for type
-        $typeStatement = $db->prepare($typeSql);
+        $typeStatement = $db->prepare($typeSQL);
 
          // Querystring value is retrieved
         $artist_type_id = $artistData['artist_type_id'];
@@ -78,7 +78,7 @@ try {
     die($e->getMessage());
 }
 
-// Converts seconds to m:ss format
+// Converts seconds to minutes and seconds
 function secondsToMinutesSeconds($seconds) {
     $minutes = floor($seconds / 60);
     $remainingSeconds = $seconds % 60;
@@ -127,6 +127,7 @@ function secondsToMinutesSeconds($seconds) {
         <?php echo htmlspecialchars($songData['year']); ?>,
         <?php echo secondsToMinutesSeconds($songData['duration']); ?></p>
     <ul>
+        <!-- Lists song attributes -->
         <li><strong>BPM:</strong> <?php echo htmlspecialchars($songData['bpm']); ?></li>
         <li><strong>Energy:</strong> <?php echo htmlspecialchars($songData['energy']); ?></li>
         <li><strong>Danceability:</strong> <?php echo htmlspecialchars($songData['danceability']); ?></li>

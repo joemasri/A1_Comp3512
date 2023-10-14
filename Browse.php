@@ -104,8 +104,8 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         }
 
         echo "<tr>";
-        
-        // song title and song_id in the querystring
+    
+        // Song info
         echo "<td><a href='SingleSong.php?song_id={$row['song_id']}'>{$title}</a></td>";
         echo "<td>{$row['artist_name']}</td>";
         echo "<td>{$row['year']}</td>";

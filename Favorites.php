@@ -2,8 +2,8 @@
 
 session_start();
 
+// Checks if Remove All button is clicked
 if (isset($_GET['removeall'])) {
-    // If the "Remove All" button is clicked, clear the favorites list
     $_SESSION['favorites'] = array();
     header("Location: Favorites.php");
     exit;
@@ -21,7 +21,7 @@ if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
     $favoriteSongs = [];
 
     foreach ($_SESSION['favorites'] as $song_id) {
-
+        // Query based on search criteria
         $query = "SELECT songs.song_id, songs.title, artists.artist_name, songs.year, genres.genre_name FROM songs
                   JOIN artists ON songs.artist_id = artists.artist_id
                   JOIN genres ON songs.genre_id = genres.genre_id
@@ -33,14 +33,14 @@ if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
 
         $favoriteSongs[] = $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
+    // Checks if Remove button from a row is clicked
     if (isset($_POST['remove'])) {
         $removeSongID = $_POST['song_id'];
         // Find and remove the specific song from the favorites array
         if (($key = array_search($removeSongID, $_SESSION['favorites'])) !== false) {
             unset($_SESSION['favorites'][$key]);
         }
-        // Redirect to update the favorites list
+        // Redirects to Favorites.php
         header("Location: Favorites.php");
         exit;
     }
@@ -92,13 +92,17 @@ if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
     </thead>
     <tbody>
         <?php
+        
          if (isset($favoriteSongs) && is_array($favoriteSongs)) {
             foreach ($favoriteSongs as $song) {
+                // Song info
                 echo "<tr>";
                 echo "<td>{$song['title']}</td>";
                 echo "<td>{$song['artist_name']}</td>";
                 echo "<td>{$song['year']}</td>";
                 echo "<td>{$song['genre_name']}</td>";
+
+                // Remove button
                 echo "<td>";
                 echo '<form action="./Favorites.php" method="POST">';
                 echo '<input type="hidden" name="song_id" value="' . $song['song_id'] . '">';

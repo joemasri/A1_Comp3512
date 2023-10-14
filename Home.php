@@ -62,10 +62,9 @@ function displayMostPopularSongs($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Create a link with the song_id as a query parameter
+        // Makes song title a link
         $songLink = "SingleSong.php?song_id={$row['song_id']}";
 
-        // Output the song title as a hyperlink and the rest as plain text
         $formattedOutput = "<li><a href='{$songLink}'>{$row['title']}</a> - {$row['artist_name']} - Popularity Score: {$row['popularity']}</li>";
         echo $formattedOutput;
     }
@@ -92,10 +91,9 @@ function displayOneHitWonders($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Create a link with the song_id as a query parameter
+        // Makes song title a link
         $songLink = "SingleSong.php?song_id={$row['song_id']}";
 
-        // Output the song title as a hyperlink and the rest as plain text
         $formattedOutput = "<li><a href='{$songLink}'>{$row['title']}</a> - {$row['artist_name']} - Popularity Score: {$row['popularity']}</li>";
         echo $formattedOutput;
     }
@@ -117,14 +115,13 @@ function displayLongestAcousticSongs($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Create a link with the song_id as a query parameter
+        // Makes song title a link
         $songLink = "SingleSong.php?song_id={$row['song_id']}";
 
-        // Convert duration to m:ss format with leading zeros
+        // Converts seconds to minutes and seconds
         $durationMinutes = floor($row['duration'] / 60);
         $durationSeconds = sprintf("%02d", $row['duration'] % 60);
 
-        // Output the song title as a hyperlink and the rest as plain text
         $formattedOutput = "<li><a href='{$songLink}'>{$row['title']}</a> - {$row['artist_name']} - Duration: {$durationMinutes}:{$durationSeconds} (Acousticness: {$row['acousticness']}%)</li>";
         echo $formattedOutput;
     }
@@ -147,10 +144,9 @@ function displayAtTheClub($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Create a link with the song_id as a query parameter
+        // Makes song title a link
         $songLink = "SingleSong.php?song_id={$row['song_id']}";
 
-        // Output the song title as a hyperlink and the rest as plain text
         $formattedOutput = "<li><a href='{$songLink}'>{$row['title']}</a> - {$row['artist_name']} - Club Friendly Score: {$row['club_friendly_score']}</li>";
         echo $formattedOutput;
     }
@@ -173,10 +169,9 @@ function displayRunningSongs($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Create a link with the song_id as a query parameter
+        // Makes song title a link
         $songLink = "SingleSong.php?song_id={$row['song_id']}";
 
-        // Output the song title as a hyperlink and the rest as plain text
         $formattedOutput = "<li><a href='{$songLink}'>{$row['title']}</a> - {$row['artist_name']} - Running Score: {$row['running_score']}</li>";
         echo $formattedOutput;
     }
@@ -200,10 +195,9 @@ function displayStudying($db) {
 
     echo '<ul>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Create a link with the song_id as a query parameter
+        // Makes song title a link
         $songLink = "SingleSong.php?song_id={$row['song_id']}";
 
-        // Output the song title as a hyperlink and the rest as plain text
         $formattedOutput = "<li><a href='{$songLink}'>{$row['title']}</a> - {$row['artist_name']} - Studying Score: {$row['studying_score']}</li>";
         echo $formattedOutput;
     }
