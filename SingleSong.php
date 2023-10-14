@@ -93,7 +93,7 @@ function secondsToMinutesSeconds($seconds) {
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="SingleSongStyles.css">
+    <link rel="stylesheet" type="text/css" href="./css/SingleSongStyles.css">
 </head>
 <body>
     <header>

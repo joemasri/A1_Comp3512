@@ -218,7 +218,7 @@ function displayStudying($db) {
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="HomeStyles.css">
+    <link rel="stylesheet" type="text/css" href="./css/HomeStyles.css">
 </head>
 <body>
     <header>

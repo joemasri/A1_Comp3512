@@ -58,7 +58,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="BrowseStyles.css">
+    <link rel="stylesheet" type="text/css" href="./css/BrowseStyles.css">
 </head>
 <body>
     <header>

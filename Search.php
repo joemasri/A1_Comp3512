@@ -23,7 +23,7 @@ $stmtGenres = $db->query($queryGenres);
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="SearchStyles.css">
+    <link rel="stylesheet" type="text/css" href="./css/SearchStyles.css">
 </head>
 <body>
     <header>

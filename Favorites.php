@@ -53,7 +53,7 @@ if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
 <head>
     <meta charset="UTF-8">
     <title>COMP 3512 Assign1</title>
-    <link rel="stylesheet" type="text/css" href="FavoritesStyles.css">
+    <link rel="stylesheet" type="text/css" href="./css/FavoritesStyles.css">
 </head>
 <body>
     <header>
