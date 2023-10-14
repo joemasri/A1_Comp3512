@@ -119,18 +119,22 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
         echo "</form>";
         echo "</td>";
 
-         // AddToFav button is clicked
+        // After adding the song to favorites, use the header function to redirect to Favorites.php
         if (isset($_POST['add_to_favorites'])) {
         $song_id = $_POST['song_id'];
-        
+
         if (!isset($_SESSION['favorites'])) {
-            $_SESSION['favorites'] = [];
+        $_SESSION['favorites'] = [];
         }
-        // if song not in favorites, add it
+
         if (!in_array($song_id, $_SESSION['favorites'])) {
-            $_SESSION['favorites'][] = $song_id;
+        $_SESSION['favorites'][] = $song_id;
         }
-    }
+
+        // Redirect to Favorites.php
+        header('Location: Favorites.php');
+        exit;
+        }
 
         // View Button
         echo "<td>";
