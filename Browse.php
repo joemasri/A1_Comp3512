@@ -152,17 +152,16 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
 </section>
 
     <!-- Footer section of page -->
-    <footer>
-        <h2>Footer</h2>
-    </footer>
-
-    <footer>
+     <footer>
         <p>Course: COMP 3512</p>
         <p>&copy; Zee El-Masri, Andrew Yu</p>
         <p>
             <a class="footer-link" href="https://github.com/joemasri/A1_Comp3512.git">GitHub Repo</a>
             <a class="footer-link" href="https://github.com/joemasri">Group Member 1</a>
             <a class="footer-link" href="https://github.com/ayu381">Group Member 2</a>
+        </p>
+        <p>
+            The assignment involves creating a web application for browsing and searching a music database. Using multiple PHP pages that all interact with eachother to create an aesthetically pleasing and functioning program.
         </p>
     </footer>
 

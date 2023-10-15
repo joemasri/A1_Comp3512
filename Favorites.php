@@ -114,7 +114,7 @@ if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
                 echo "<td>";
                 echo '<form action="SingleSong.php" method="GET">';
                 echo '<input type="hidden" name="song_id" value="' . $song['song_id'] . '">';
-                echo '<input class="" type="submit" name="viewBtn" value="View">';
+                echo '<input class="view-button" type="submit" name="viewBtn" value="View">';
                 echo "</form>";
                 echo "</td>";
                 echo "</tr>";
@@ -129,16 +129,15 @@ if (isset($_SESSION['favorites']) && is_array($_SESSION['favorites'])) {
 
     <!-- Footer section of page -->
     <footer>
-        <h2>Footer</h2>
-    </footer>
-
-    <footer>
         <p>Course: COMP 3512</p>
         <p>&copy; Zee El-Masri, Andrew Yu</p>
         <p>
             <a class="footer-link" href="https://github.com/joemasri/A1_Comp3512.git">GitHub Repo</a>
             <a class="footer-link" href="https://github.com/joemasri">Group Member 1</a>
             <a class="footer-link" href="https://github.com/ayu381">Group Member 2</a>
+        </p>
+        <p>
+            The assignment involves creating a web application for browsing and searching a music database. Using multiple PHP pages that all interact with eachother to create an aesthetically pleasing and functioning program.
         </p>
     </footer>
 </body>

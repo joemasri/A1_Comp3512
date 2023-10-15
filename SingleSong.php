@@ -152,6 +152,9 @@ function secondsToMinutesSeconds($seconds) {
             <a class="footer-link" href="https://github.com/joemasri">Group Member 1</a>
             <a class="footer-link" href="https://github.com/ayu381">Group Member 2</a>
         </p>
+        <p>
+            The assignment involves creating a web application for browsing and searching a music database. Using multiple PHP pages that all interact with eachother to create an aesthetically pleasing and functioning program.
+        </p>
     </footer>
 </body>
 </html>
