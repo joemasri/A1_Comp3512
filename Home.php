@@ -242,6 +242,8 @@ function displayStudying($db) {
         GitHub Link: <a href="https://github.com/joemasri/A1_Comp3512">https://github.com/joemasri/A1_Comp3512</a>
 
     </p>
+
+    <!-- Display boxes with corresponding db information in them -->
     <div class="box">
         <h2>Top Genres</h2>
         <?php displayTopGenres($db); ?>
@@ -276,6 +278,7 @@ function displayStudying($db) {
     </div>
     </section>
 
+    <!-- Footer Section -->
     <footer>
         <p>Course: COMP 3512</p>
         <p>&copy; Zee El-Masri, Andrew Yu</p>

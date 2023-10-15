@@ -20,6 +20,8 @@
             <li><a href="AboutUs.php">About Us</a></li>
         </ul>
     </nav>
+
+<!-- About us Information and links -->
 <body>
 <section>
     <h1>About Us</h1>
@@ -39,6 +41,7 @@
 
     </section>
 
+    <!-- Footer Section -->
     <footer>
         <p>Course: COMP 3512</p>
         <p>&copy; Zee El-Masri, Andrew Yu</p>
@@ -51,6 +54,5 @@
             The assignment involves creating a web application for browsing and searching a music database. Using multiple PHP pages that all interact with eachother to create an aesthetically pleasing and functioning program.
         </p>
     </footer>
-   
 </body>
 </html>

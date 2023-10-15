@@ -99,6 +99,7 @@ if (isset($_GET['title']) || isset($_GET['artistlist']) || isset($_GET['genrelis
     <?php
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $title = $row['title'];
+        // Checks if length of string is over 25, adds ...
         if (strlen($title) > 25) {
             $title = substr($title, 0, 25) . '&hellip;';
         }
