@@ -1,4 +1,4 @@
-/* CSS styles for the entire webpage */
+/* About webpage */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,7 +9,7 @@ body {
     background-image: linear-gradient(to left, rgb(29, 27, 27) , rgb(165, 35, 251)); 
 }
 
-/* Header styles */
+/* Header */
 header {
     background-color: #333;
     color: #fff;
@@ -31,7 +31,7 @@ section h1 {
     margin-top: -10px;
 }
 
-/* Navigation styles */
+/* Nav */
 nav {
     background-color: #444;
     text-align: center;
